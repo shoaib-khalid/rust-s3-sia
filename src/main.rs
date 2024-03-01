@@ -4,7 +4,7 @@ use s3::region::Region;
 use std::str::FromStr;
 //use s3::error::S3Error;
 use s3::BucketConfiguration;
-use std::env;
+//use std::env;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -19,16 +19,15 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Access Key is: {}", access_key); // Access Key is: AKIAVU7KJX4QAMXXQ7OC
     println!("Secret Key is: {}", secret_key); // Secret Key is: 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
 
-
     // AWS S3 credentials
     //let credentials = Credentials::from_profile(Some("default"))?;
-    let credentials = Credentials::new(access_key,secret_key);
+    let credentials = Credentials::new(Some(access_key), Some(secret_key), None, None, None).unwrap();
 
     // Specify the S3 Region
     let region = Region::from_str("us-east-1")?;
 
     // Create a new bucket with the given name
-    let bucket_name = "my4745-bt-154-09123";
+    let bucket_name = "my4745-bt-154-091234";
     let _bucket = Bucket::new(bucket_name, region.clone(), credentials.clone())?;
 
     // Create the bucket
